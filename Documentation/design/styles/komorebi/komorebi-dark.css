@@ -1,0 +1,998 @@
+/*
+ * KOMOREBI — DARK THEME
+ * Extracted from concepts/11-komorebi-dark.html.
+ *
+ * Complete standalone stylesheet: base components, Komorebi visual treatment,
+ * responsive layouts, interactive state styling, and reduced-motion support.
+ * Use <body class="komorebi"> with the existing dashboard markup.
+ * Load this file OR komorebi-light.css, not both.
+ * Interactions are supplied by the existing HTML's JavaScript.
+ */
+
+/* Foundation: predictable box sizing and browser defaults. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.5 var(--font,Arial,sans-serif);
+  min-height: 100vh;
+}
+
+/* Controls: inherit the dashboard typography and provide visible keyboard focus. */
+button,
+input {
+  font: inherit;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
+}
+
+button {
+  transition: background .2s,transform .2s,border-color .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Page frame: centered content, header, and section navigation. */
+.shell {
+  max-width: 1500px;
+  margin: auto;
+  padding: 28px 46px 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 22px;
+}
+
+.brand {
+  font-size: 23px;
+  letter-spacing: -1px;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  gap: 25px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.nav a:first-child {
+  color: var(--ink);
+}
+
+.top-status {
+  font: 11px var(--mono,monospace);
+  letter-spacing: .05em;
+}
+
+/* Home status: a small, gently breathing indicator. */
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  box-shadow: 0 0 16px var(--accent);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Welcome area: editorial heading, ambient symbol, and at-a-glance weather. */
+.welcome {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 39px 0 33px;
+  overflow: hidden;
+}
+
+/* Type hierarchy: quiet monospace labels accompany the main reading typography. */
+.eyebrow,
+.label {
+  font: 10px/1.5 var(--mono,monospace);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-size: clamp(36px,4.1vw,62px);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -.055em;
+  margin: 0 0 16px;
+}
+
+p {
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hero-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-symbol {
+  width: 118px;
+  height: 118px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 67px;
+  color: var(--accent);
+  position: relative;
+  animation: breathe 7s ease-in-out infinite;
+}
+
+.weather {
+  text-align: right;
+}
+
+.weather strong {
+  display: block;
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -2px;
+}
+
+.weather span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.weather small {
+  display: block;
+  margin-top: 12px;
+  font: 10px monospace;
+  color: var(--muted);
+}
+
+/* Context strip: date and concise environment information. */
+.ribbon {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  margin-bottom: 22px;
+  font: 10px monospace;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+
+.ribbon span:first-child {
+  color: var(--ink);
+}
+
+/* Dashboard layout: two columns on desktop; stacked panels on small screens. */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 18px;
+}
+
+/* Shared panels: surface, borders, headings, and status badges. */
+.panel {
+  min-width: 0;
+  padding: 25px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius,12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 21px;
+  gap: 12px;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -.04em;
+  font-weight: 500;
+}
+
+.panel-head .label {
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.status-pill {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  font-size: 10px;
+  padding: 4px 9px;
+  color: var(--muted);
+}
+
+/* Home controls: thermostat dial, device switches, temperature slider, and scenes. */
+.home-main {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.temperature {
+  height: 130px;
+  width: 130px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 5px solid var(--line);
+  border-top-color: var(--accent);
+  border-right-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.temperature strong {
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -2px;
+}
+
+.temperature span {
+  font: 9px monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.home-controls {
+  flex: 1;
+  min-width: 0;
+}
+
+.device {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.device:first-child {
+  padding-top: 0;
+}
+
+.device small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Device state follows aria-checked; JavaScript in the existing HTML updates it. */
+.switch {
+  border: 0;
+  width: 34px;
+  height: 20px;
+  background: var(--line);
+  border-radius: 20px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.switch:after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--muted);
+  left: 3px;
+  top: 3px;
+  transition: transform .25s;
+}
+
+.switch[aria-checked=true] {
+  background: var(--accent);
+}
+
+.switch[aria-checked=true]:after {
+  transform: translateX(14px);
+  background: var(--onaccent);
+}
+
+.climate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font: 10px monospace;
+  color: var(--muted);
+}
+
+input[type=range] {
+  width: 100%;
+  accent-color: var(--accent);
+  min-width: 0;
+}
+
+/* Scene selection follows aria-pressed, including the active color treatment. */
+.scenes {
+  display: flex;
+  gap: 7px;
+  margin-top: 23px;
+}
+
+.scene {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius,8px);
+  padding: 9px 5px;
+  font-size: 11px;
+}
+
+.scene[aria-pressed=true] {
+  background: var(--accent);
+  color: var(--onaccent);
+  border-color: var(--accent);
+}
+
+/* Study area: course progress and the daily Japanese vocabulary card. */
+.study-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.study-copy {
+  max-width: 250px;
+}
+
+.study-copy .label {
+  color: var(--accent);
+}
+
+h3 {
+  font-size: 25px;
+  line-height: 1.15;
+  letter-spacing: -.05em;
+  font-weight: 500;
+  margin: 9px 0 10px;
+}
+
+.study-copy p {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.progress {
+  height: 4px;
+  background: var(--line);
+  margin: 16px 0 7px;
+  border-radius: 4px;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  width: 68%;
+  background: var(--accent);
+}
+
+.progress-caption {
+  display: flex;
+  justify-content: space-between;
+  font: 9px monospace;
+  color: var(--muted);
+}
+
+.flashcard {
+  flex-shrink: 0;
+  width: 112px;
+  min-height: 126px;
+  padding: 12px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius,10px);
+  text-align: center;
+}
+
+.flashcard strong {
+  display: block;
+  font-size: 33px;
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.flashcard small {
+  font-size: 9px;
+  color: var(--muted);
+}
+
+/* Focus controls: timer digits, primary action, and reset. */
+.focus-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+  padding-top: 15px;
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--onaccent);
+  border: 1px solid var(--accent);
+  padding: 9px 15px;
+  border-radius: var(--radius,7px);
+  font-size: 11px;
+}
+
+.timer {
+  font: 18px monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.reset {
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* Calendar: event rows and the compact week strip. */
+.event {
+  display: grid;
+  grid-template-columns: 57px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.event time {
+  font: 11px monospace;
+  color: var(--muted);
+}
+
+.event strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.event small {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.event .event-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.week {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 5px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 35px;
+  padding: 6px;
+  border-radius: var(--radius,6px);
+  font: 10px monospace;
+  color: var(--muted);
+}
+
+.day b {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.day.today {
+  background: var(--accent);
+  color: var(--onaccent);
+}
+
+.day.today b {
+  color: var(--onaccent);
+}
+
+/* To-dos: custom checkboxes, completion styling, and summary. */
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.task input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.task input:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task input:checked:after {
+  content: '✓';
+  font-size: 12px;
+  color: var(--onaccent);
+}
+
+.task input:checked+span {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task small {
+  margin-left: auto;
+  color: var(--muted);
+  font: 9px monospace;
+}
+
+.task-foot {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  font: 10px monospace;
+  color: var(--muted);
+}
+
+/* Footer: concept information and navigation back to the gallery. */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 23px 0 0;
+  color: var(--muted);
+  font: 9px monospace;
+  letter-spacing: .03em;
+}
+
+.footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.concept-number {
+  color: var(--accent);
+}
+
+/* Feedback: the .show class reveals the existing demo status message. */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%,20px);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 12px 22px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+  z-index: 20;
+  font-size: 12px;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%,0);
+}
+
+/* Ambient motion: a slow change in opacity and scale. Disabled for reduced motion. */
+@keyframes breathe {
+  50% {
+    opacity: .65;
+    transform: scale(.98);
+  }
+
+}
+
+/* Komorebi theme tokens: background, text, muted text, dividers, accents, and surfaces.
+   Both variants use body class="komorebi"; choose one stylesheet at a time. */
+.komorebi {
+  /* Native form controls match the selected theme. */
+  color-scheme: dark;
+  --bg: #191e1a;
+  --panel: #222a23;
+  --ink: #e8e5d8;
+  --muted: #a9b09f;
+  --line: #414d40;
+  --accent: #afbd98;
+  --onaccent: #1a241b;
+  --soft: #303b2e;
+  --radius: 3px;
+}
+
+/* Komorebi composition: generous margins, serif headings, organic light motif,
+   open panels, and softly filled home controls. These override the shared base. */
+.komorebi .shell {
+  max-width: 1320px;
+  padding: 32px 65px;
+}
+
+.komorebi .brand {
+  letter-spacing: .17em;
+  font-weight: 400;
+}
+
+.komorebi h1,
+.komorebi h2,
+.komorebi h3 {
+  font-family: Georgia,serif;
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+
+.komorebi .welcome {
+  padding: 49px 0 40px;
+}
+
+.komorebi .hero-symbol {
+  border: 0;
+  background: #303b2e;
+  border-radius: 49% 51% 43% 57%;
+  width: 145px;
+  height: 160px;
+  font-family: serif;
+  color: #b8c59e;
+  font-size: 70px;
+}
+
+.komorebi .dashboard {
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px 38px;
+}
+
+.komorebi .panel {
+  border: 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+}
+
+.komorebi .home {
+  background: #29332b;
+  padding: 25px;
+  border: 0;
+  border-radius: 4px;
+}
+
+.komorebi .ribbon {
+  margin-bottom: 4px;
+}
+
+.komorebi .temperature {
+  border-width: 2px;
+}
+
+.komorebi .flashcard {
+  border: none;
+  background: #303b2e;
+}
+
+.komorebi .primary {
+  border-radius: 30px;
+  padding: 10px 24px;
+}
+
+.komorebi .tasks,
+.komorebi .agenda {
+  padding-top: 17px;
+}
+
+.komorebi .footer {
+  border-top: 1px solid var(--line);
+  margin-top: 18px;
+}
+
+/* Wide displays: extra breathing room for the dashboard. */
+@media (min-width:1600px) {
+  /* Page frame: centered content, header, and section navigation. */
+  .shell {
+    padding-top: 40px;
+  }
+
+  /* Welcome area: editorial heading, ambient symbol, and at-a-glance weather. */
+  .welcome {
+    padding-top: 48px;
+    padding-bottom: 45px;
+  }
+
+  /* Shared panels: surface, borders, headings, and status badges. */
+  .panel {
+    padding: 30px;
+  }
+
+  /* Dashboard layout: two columns on desktop; stacked panels on small screens. */
+  .dashboard {
+    gap: 24px;
+  }
+
+}
+
+/* Tablet and compact desktop: tighten margins and control dimensions. */
+@media (max-width:1000px) {
+  .shell,
+  .komorebi .shell {
+    padding: 22px 25px;
+  }
+
+  .nav {
+    gap: 15px;
+  }
+
+  .hero-right {
+    gap: 18px;
+  }
+
+  .hero-symbol {
+    width: 95px;
+    height: 95px;
+  }
+
+  /* Shared panels: surface, borders, headings, and status badges. */
+  .panel {
+    padding: 20px;
+  }
+
+  /* Home controls: thermostat dial, device switches, temperature slider, and scenes. */
+  .home-main {
+    gap: 16px;
+  }
+
+  .temperature {
+    width: 108px;
+    height: 108px;
+  }
+
+  .flashcard {
+    width: 90px;
+  }
+
+  /* Study area: course progress and the daily Japanese vocabulary card. */
+  .study-body {
+    gap: 12px;
+  }
+
+  .study-copy h3 {
+    font-size: 23px;
+  }
+
+  .top-status {
+    font-size: 9px;
+  }
+
+}
+
+/* Mobile: stack panels, wrap navigation, and simplify secondary information. */
+@media (max-width:740px) {
+  .shell,
+  .komorebi .shell {
+    padding: 20px;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    gap: 13px;
+    padding-bottom: 16px;
+  }
+
+  .brand {
+    font-size: 21px;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+
+  .top-status {
+    font-size: 8px;
+  }
+
+  .welcome,
+  .komorebi .welcome {
+    padding: 29px 0 25px;
+    gap: 12px;
+  }
+
+  .hero-symbol {
+    display: none!important;
+  }
+
+  .hero-right {
+    align-self: flex-start;
+    margin-top: 29px;
+    flex-shrink: 0;
+  }
+
+  .weather strong {
+    font-size: 29px;
+  }
+
+  .weather small {
+    display: none;
+  }
+
+  .weather span {
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 39px;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: .09em;
+    max-width: 240px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    max-width: 280px;
+  }
+
+  /* Context strip: date and concise environment information. */
+  .ribbon {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .ribbon span:last-child {
+    display: none;
+  }
+
+  .dashboard,
+  .komorebi .dashboard {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .panel,
+  .komorebi .panel {
+    padding: 22px;
+  }
+
+  /* Home controls: thermostat dial, device switches, temperature slider, and scenes. */
+  .home-main {
+    gap: 23px;
+  }
+
+  .temperature {
+    width: 120px;
+    height: 120px;
+  }
+
+  .flashcard {
+    width: 108px;
+  }
+
+  /* Footer: concept information and navigation back to the gallery. */
+  .footer {
+    font-size: 8px;
+    align-items: flex-start;
+  }
+
+  .footer span:nth-child(2) {
+    display: none;
+  }
+
+  .task small {
+    font-size: 8px;
+  }
+
+  /* Calendar: event rows and the compact week strip. */
+  .event {
+    grid-template-columns: 48px 1fr auto;
+  }
+
+  /* Focus controls: timer digits, primary action, and reset. */
+  .focus-row {
+    gap: 8px;
+  }
+
+  .primary {
+    padding: 9px 12px;
+  }
+
+  .study-copy h3 {
+    font-size: 25px;
+  }
+
+}
+
+/* Accessibility: honor the system preference by removing animation and transitions. */
+@media (prefers-reduced-motion:reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none!important;
+    transition: none!important;
+    scroll-behavior: auto!important;
+  }
+
+}

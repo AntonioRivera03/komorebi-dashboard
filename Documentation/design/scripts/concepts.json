@@ -1,0 +1,290 @@
+[
+  {
+    "slug": "01-orbital",
+    "name": "Orbital",
+    "tag": "A quiet intelligence",
+    "desc": "A cinematic spacecraft console with warm ivory type, instrument panels, and a single red heartbeat.",
+    "palette": [
+      "#111312",
+      "#202522",
+      "#e8e5d8",
+      "#ed604c"
+    ],
+    "body": "orbital",
+    "brand": "H / OS",
+    "eyebrow": "RESIDENTIAL OPERATING SYSTEM",
+    "title": "Welcome home,<br>commander.",
+    "sub": "Your little corner of the universe is in balance.",
+    "hero": "ALL SYSTEMS NOMINAL",
+    "order": [
+      "home",
+      "study",
+      "agenda",
+      "tasks"
+    ],
+    "motif": "◎",
+    "notes": "Instrument rails · soft red pulse · cinematic restraint"
+  },
+  {
+    "slug": "02-komorebi",
+    "name": "Komorebi",
+    "tag": "Space to be human",
+    "desc": "Japanese editorial calm: warm paper, olive green, generous margins, and an unhurried rhythm.",
+    "palette": [
+      "#f1eee5",
+      "#dedfcd",
+      "#435344",
+      "#a36445"
+    ],
+    "body": "komorebi",
+    "brand": "木漏れ日",
+    "eyebrow": "FRIDAY, SEPTEMBER 04 / YOUR DAILY SPACE",
+    "title": "A little more<br>room to breathe.",
+    "sub": "A clear mind. A comfortable home. One thing at a time.",
+    "hero": "HOME, IN HARMONY",
+    "order": [
+      "study",
+      "home",
+      "tasks",
+      "agenda"
+    ],
+    "motif": "光",
+    "notes": "Paper surfaces · serif headlines · slow breathing light"
+  },
+  {
+    "slug": "03-basecamp",
+    "name": "Basecamp",
+    "tag": "Your next ascent starts here",
+    "desc": "An alpine field station. Pine, chalk, and rescue orange turn your day into an inviting expedition.",
+    "palette": [
+      "#e9e7dc",
+      "#263d36",
+      "#ed6835",
+      "#c8cbb5"
+    ],
+    "body": "basecamp",
+    "brand": "BASE / CAMP",
+    "eyebrow": "PERSONAL FIELD STATION • EST. 2026",
+    "title": "Settle in.<br>Then head out.",
+    "sub": "A good base makes every adventure possible.",
+    "hero": "CONDITIONS: GOOD TO GO",
+    "order": [
+      "home",
+      "agenda",
+      "study",
+      "tasks"
+    ],
+    "motif": "↗",
+    "notes": "Field labels · contour geometry · orange wayfinding"
+  },
+  {
+    "slug": "04-blueprint",
+    "name": "Blueprint",
+    "tag": "Life, thoughtfully engineered",
+    "desc": "An architectural drawing you can live in. Cobalt, precise linework, and technical annotations.",
+    "palette": [
+      "#173ca0",
+      "#234bb3",
+      "#edf3ff",
+      "#a7caff"
+    ],
+    "body": "blueprint",
+    "brand": "DWELL / 01",
+    "eyebrow": "DOMESTIC SYSTEMS / REVISION 04.09",
+    "title": "A framework<br>for a good day.",
+    "sub": "Everything connected. Everything in its place.",
+    "hero": "SCHEMATIC A — CURRENT STATE",
+    "order": [
+      "tasks",
+      "home",
+      "study",
+      "agenda"
+    ],
+    "motif": "+",
+    "notes": "Drawing grid · outlined controls · precise motion"
+  },
+  {
+    "slug": "05-soft-play",
+    "name": "Soft Play",
+    "tag": "Serious life. Lighter interface.",
+    "desc": "Tactile, optimistic, and a little strange. Butter yellow, lilac, chunky controls, and playful shapes.",
+    "palette": [
+      "#f6ecd9",
+      "#cfc0eb",
+      "#ef885f",
+      "#393243"
+    ],
+    "body": "softplay",
+    "brand": "hello, habitat ✳",
+    "eyebrow": "A NICE PLACE TO GET THINGS DONE",
+    "title": "Big ideas.<br>Soft landing.",
+    "sub": "Turn the lights up. Put a little curiosity on the calendar.",
+    "hero": "LOOKING GOOD IN HERE",
+    "order": [
+      "study",
+      "tasks",
+      "home",
+      "agenda"
+    ],
+    "motif": "✳",
+    "notes": "Pill controls · springy hover · candy-colored panels"
+  },
+  {
+    "slug": "06-after-hours",
+    "name": "After Hours",
+    "tag": "The computer as a companion",
+    "desc": "An amber phosphor terminal with a surprisingly domestic soul. Crisp, focused, and quietly nostalgic.",
+    "palette": [
+      "#17150f",
+      "#242015",
+      "#efb65b",
+      "#9e895f"
+    ],
+    "body": "terminal",
+    "brand": "habitat.exe",
+    "eyebrow": "PERSONAL MAINFRAME // SESSION 00042",
+    "title": "Good evening,<br>operator_",
+    "sub": "Home is online. The rest can wait a moment.",
+    "hero": "> ENVIRONMENT CHECK: PASSED",
+    "order": [
+      "home",
+      "tasks",
+      "agenda",
+      "study"
+    ],
+    "motif": "▥",
+    "notes": "Monospace throughout · scanline texture · blinking cursor"
+  },
+  {
+    "slug": "07-alloy",
+    "name": "Alloy",
+    "tag": "Precision you can feel",
+    "desc": "Brushed silver meets charcoal and electric mint. A premium hi-fi panel for your entire environment.",
+    "palette": [
+      "#d8dcdd",
+      "#f0f2f1",
+      "#252b2d",
+      "#6fffc9"
+    ],
+    "body": "alloy",
+    "brand": "a / alloy",
+    "eyebrow": "THE PERSONAL ENVIRONMENT SYSTEM",
+    "title": "Perfectly<br>in your element.",
+    "sub": "Fine-tune your space. Find your frequency.",
+    "hero": "ENVIRONMENT / OPTIMAL",
+    "order": [
+      "home",
+      "study",
+      "tasks",
+      "agenda"
+    ],
+    "motif": "◉",
+    "notes": "Machined surfaces · rotary dial · mint indicators"
+  },
+  {
+    "slug": "08-blue-hour",
+    "name": "Blue Hour",
+    "tag": "Between the city and the stars",
+    "desc": "An atmospheric twilight retreat: ink blue, lavender light, translucent panels, and gentle orbital motion.",
+    "palette": [
+      "#171d39",
+      "#293055",
+      "#bbb7ee",
+      "#e7bda1"
+    ],
+    "body": "bluehour",
+    "brand": "vesper",
+    "eyebrow": "YOUR EVENING, WITH INTENTION",
+    "title": "Less noise.<br>More possibility.",
+    "sub": "A warm home beneath a very big sky.",
+    "hero": "THE EVENING IS YOURS",
+    "order": [
+      "study",
+      "agenda",
+      "home",
+      "tasks"
+    ],
+    "motif": "☾",
+    "notes": "Drifting light · frosted surfaces · spacious composition"
+  },
+  {
+    "slug": "09-mondrian",
+    "name": "Studio 09",
+    "tag": "Make room for bold ideas",
+    "desc": "A graphic designer’s control room. Hard edges, giant numerals, acid yellow, and unapologetic structure.",
+    "palette": [
+      "#ecebe4",
+      "#171917",
+      "#dbf35c",
+      "#b9c2ee"
+    ],
+    "body": "studio",
+    "brand": "STUDIO—09",
+    "eyebrow": "LIVE WELL. BUILD THINGS. STAY CURIOUS.",
+    "title": "Your life.<br>In good order.",
+    "sub": "A workspace for the person you’re becoming.",
+    "hero": "TODAY IS A WORK IN PROGRESS",
+    "order": [
+      "tasks",
+      "study",
+      "home",
+      "agenda"
+    ],
+    "motif": "↗",
+    "notes": "Heavy rules · oversized type · crisp sliding accents"
+  },
+  {
+    "slug": "10-commonplace",
+    "name": "Commonplace",
+    "tag": "A home for a curious mind",
+    "desc": "A modern reading room with oxblood, parchment, and ink. Scholarly without feeling old-fashioned.",
+    "palette": [
+      "#f4eddf",
+      "#772f3e",
+      "#302c27",
+      "#b7bca0"
+    ],
+    "body": "library",
+    "brand": "The Commonplace",
+    "eyebrow": "A PERSONAL JOURNAL OF HOME & POSSIBILITY",
+    "title": "Live deliberately.<br>Learn endlessly.",
+    "sub": "A few useful things, beautifully kept.",
+    "hero": "VOLUME 01 / AN ORDINARY, GOOD DAY",
+    "order": [
+      "study",
+      "agenda",
+      "tasks",
+      "home"
+    ],
+    "motif": "§",
+    "notes": "Bookish typography · fine rules · oxblood details"
+  },
+  {
+    "slug": "11-komorebi-dark",
+    "name": "Komorebi · Night",
+    "tag": "Room to breathe, after dark",
+    "desc": "Komorebi after sunset: warm charcoal, moss-green surfaces, soft ivory type, and the same unhurried Japanese editorial calm.",
+    "palette": [
+      "#191e1a",
+      "#29332b",
+      "#e8e5d8",
+      "#afbd98"
+    ],
+    "body": "komorebi",
+    "brand": "木漏れ日",
+    "eyebrow": "FRIDAY, SEPTEMBER 04 / YOUR DAILY SPACE",
+    "title": "A little more<br>room to breathe.",
+    "sub": "A clear mind. A comfortable home. One thing at a time.",
+    "hero": "HOME, IN HARMONY",
+    "order": [
+      "study",
+      "home",
+      "tasks",
+      "agenda"
+    ],
+    "motif": "光",
+    "notes": "Warm charcoal · moss & ivory · slow breathing light",
+    "theme": "komorebi-dark",
+    "dark": true
+  }
+]
