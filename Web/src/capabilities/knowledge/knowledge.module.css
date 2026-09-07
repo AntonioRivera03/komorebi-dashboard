@@ -1,0 +1,246 @@
+.sourceRow {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 8px;
+  margin: 0 -8px;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sourceRow:hover {
+  background: var(--soft);
+}
+
+.kind {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  background: var(--soft);
+  display: grid;
+  place-items: center;
+  font: 9px var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--symbol);
+}
+
+.sourceTitle {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sourceMeta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font: 9px var(--mono);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.reader {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px 38px;
+}
+
+.passage {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 80px;
+}
+
+.passage[data-active='true'] {
+  background: var(--soft);
+  margin: 0 -12px;
+  padding-inline: 12px;
+  border-radius: 4px;
+}
+
+.locator {
+  font: 10px var(--mono);
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  padding-top: 3px;
+}
+
+.locator small {
+  display: block;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.passageText {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+}
+
+.summary {
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--home);
+  font-size: 12px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.revision {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  align-items: center;
+}
+
+.revision[data-superseded='true'] {
+  color: var(--muted);
+}
+
+.noteCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--panel);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+  animation: rise 0.35s ease both;
+}
+
+.noteCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.noteCard h3 {
+  font-size: 19px;
+}
+
+.noteBody {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.noteFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font: 9px var(--mono);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editor textarea {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 260px;
+  letter-spacing: -0.005em;
+}
+
+.prose {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  white-space: pre-wrap;
+}
+
+.question {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-left: 2px solid var(--warn);
+  background: var(--warn-soft);
+  border-radius: 0 4px 4px 0;
+  font-size: 12px;
+}
+
+.relation {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  align-items: start;
+}
+
+.relation small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.result {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.result mark {
+  background: var(--warn-soft);
+  color: inherit;
+  padding: 0 2px;
+}
+
+.result q {
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.searchBar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.searchBar input {
+  flex: 1;
+  min-width: 220px;
+  font-family: var(--serif);
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 1000px) {
+  .reader {
+    grid-template-columns: 1fr;
+  }
+}

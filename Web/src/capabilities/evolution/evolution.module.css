@@ -1,0 +1,107 @@
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  animation: rise 0.35s ease both;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card[aria-current='true'] {
+  border-color: var(--accent);
+}
+
+.card h3 {
+  font-size: 19px;
+}
+
+.card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.section b {
+  font: 9px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.criterion {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.criterion small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.evidence a,
+.evidence span {
+  font-size: 11px;
+  padding: 6px 10px;
+  border-left: 2px solid var(--accent);
+  display: block;
+}
+
+.evidence code {
+  font: 9px var(--mono);
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+.outcome {
+  padding: 14px;
+  border-radius: 4px;
+  background: var(--home);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.outcome b {
+  display: block;
+  font: 9px var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+  margin-bottom: 4px;
+}

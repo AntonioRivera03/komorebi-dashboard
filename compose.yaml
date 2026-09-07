@@ -1,0 +1,70 @@
+name: komorebi
+
+x-server: &server
+  build: ./Server
+  environment:
+    KOMOREBI_DATABASE_URL: postgresql+psycopg://komorebi:komorebi@postgres:5432/komorebi
+    KOMOREBI_FILE_ROOT: /data/files
+    KOMOREBI_ALLOWED_ORIGINS: '["http://localhost:${KOMOREBI_PORT:-8080}","http://127.0.0.1:${KOMOREBI_PORT:-8080}"]'
+    KOMOREBI_ALLOWED_HOSTS: '["localhost","127.0.0.1"]'
+  volumes:
+    - app-data:/data
+
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: komorebi
+      POSTGRES_PASSWORD: komorebi
+      POSTGRES_DB: komorebi
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U komorebi -d komorebi"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  init:
+    <<: *server
+    command: ["sh", "-ec", "cd /data; if [ ! -f .env ]; then komorebi-admin init; fi; cd /app; alembic upgrade head"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    <<: *server
+    restart: unless-stopped
+    command: ["uvicorn", "komorebi_server.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  worker:
+    <<: *server
+    restart: unless-stopped
+    command: ["komorebi-worker"]
+    tmpfs:
+      - /tmp:size=1g,mode=1777
+    depends_on:
+      init:
+        condition: service_completed_successfully
+
+  web:
+    build: ./Web
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${KOMOREBI_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+  app-data:

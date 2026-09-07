@@ -1,0 +1,117 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background: var(--home);
+  border-radius: 4px;
+}
+
+.minutes {
+  font-family: var(--serif);
+  font-size: 56px;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.minutes small {
+  font: 11px var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.budget {
+  display: flex;
+  height: 14px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.budget span {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.budget span[data-part='used'] {
+  background: var(--accent);
+}
+
+.budget span[data-part='buffer'] {
+  background: var(--muted);
+  opacity: 0.6;
+}
+
+.budgetCaption {
+  display: flex;
+  justify-content: space-between;
+  font: 9px var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.candidate {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  animation: rise 0.3s ease both;
+}
+
+.candidate[data-decision='dismissed'] {
+  opacity: 0.45;
+}
+
+.candidate[data-decision='accepted'],
+.candidate[data-decision='scheduled'] {
+  background: var(--soft);
+  margin: 0 -12px;
+  padding-inline: 12px;
+  border-radius: 4px;
+}
+
+.duration {
+  font-family: var(--serif);
+  font-size: 24px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.duration small {
+  display: block;
+  font: 9px var(--mono);
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+.reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.aiNote {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  border-left: 2px solid var(--accent);
+  padding-left: 10px;
+  line-height: 1.5;
+}
+
+.excluded {
+  font-size: 11px;
+  color: var(--muted);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}

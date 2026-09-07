@@ -1,0 +1,249 @@
+.rooms {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.roomTab {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: var(--pill);
+  padding: 8px 14px;
+  font-size: 12px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.roomTab[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--onaccent);
+  border-color: var(--accent);
+}
+
+.roomTab i {
+  font-style: normal;
+  font-family: var(--serif);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.device {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  background: var(--home);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: rise 0.35s ease both;
+  transition: border-color 0.2s;
+}
+
+.device[data-status='unavailable'] {
+  opacity: 0.7;
+  border-style: dashed;
+}
+
+.device[data-status='unknown'] {
+  border-color: var(--danger-soft);
+}
+
+.deviceHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.deviceName {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deviceName i {
+  font-style: normal;
+  color: var(--symbol);
+}
+
+.reading {
+  font-family: var(--serif);
+  font-size: 30px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.reading small {
+  font: 10px var(--mono);
+  color: var(--muted);
+  margin-left: 6px;
+  letter-spacing: 0.05em;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 9px var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tempChips {
+  display: flex;
+  gap: 4px;
+}
+
+.tempChips button {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font: 9px var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tempChips button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--onaccent);
+  border-color: var(--accent);
+}
+
+.dial {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-right-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dial strong {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.dial span {
+  font: 8px var(--mono);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sceneCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: rise 0.35s ease both;
+}
+
+.sceneCard[data-repair='true'] {
+  border-color: var(--danger);
+  border-style: dashed;
+}
+
+.sceneCard h3 {
+  font-size: 22px;
+}
+
+.targets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.targets li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.targets li b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.runTarget {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  align-items: center;
+}
+
+.preview {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto;
+  gap: 8px 12px;
+  align-items: center;
+  font-size: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+
+.preview .arrow {
+  color: var(--muted);
+}
+
+.opRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.opRow small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.connRow {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.connRow dt {
+  font: 9px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.connRow dd {
+  margin: 0;
+}

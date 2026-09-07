@@ -1,0 +1,143 @@
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  font-size: 22px;
+}
+
+.countdown {
+  font-family: var(--serif);
+  font-size: 44px;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.countdown small {
+  font: 10px var(--mono);
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-left: 6px;
+}
+
+.topic {
+  display: grid;
+  grid-template-columns: 1.2fr 60px 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.topicHead {
+  display: grid;
+  grid-template-columns: 1.2fr 60px 1fr 1fr;
+  gap: 16px;
+  font: 9px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 8px;
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.bar[data-kind='performance'] span {
+  background: var(--symbol);
+}
+
+.bar[data-kind='performance'][data-none='true'] {
+  background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
+}
+
+.run {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  align-items: center;
+}
+
+.run small {
+  display: block;
+  color: var(--muted);
+  font: 9px var(--mono);
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+
+.error {
+  border-left: 2px solid var(--danger);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  background: var(--panel);
+  border-radius: 0 4px 4px 0;
+}
+
+.error q {
+  font-family: var(--serif);
+  font-size: 14px;
+  quotes: none;
+}
+
+.weights {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.weights span {
+  background: var(--accent);
+  opacity: 0.9;
+}
+
+.weights span:nth-child(2) {
+  opacity: 0.7;
+}
+
+.weights span:nth-child(3) {
+  opacity: 0.5;
+}
+
+.weights span:nth-child(4) {
+  opacity: 0.35;
+}

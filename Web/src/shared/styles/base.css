@@ -1,0 +1,187 @@
+/* Foundation: predictable box sizing, typography and focus behaviour. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.5 var(--font);
+  min-height: 100vh;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(36px, 4.1vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 25px;
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+/* Type hierarchy: quiet monospace labels accompany the main reading typography. */
+.eyebrow,
+.label {
+  font: 10px/1.5 var(--mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 11px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+input[type='range'] {
+  width: 100%;
+  accent-color: var(--accent);
+  min-width: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--onaccent);
+}
+
+/* Ambient motion: a slow change in opacity and scale. */
+@keyframes breathe {
+  50% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.rise {
+  animation: rise 0.35s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

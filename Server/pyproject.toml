@@ -4,11 +4,23 @@ version = "0.1.0"
 description = "FastAPI server for the Komorebi home and life dashboard"
 requires-python = ">=3.11"
 dependencies = [
+    "alembic>=1.16,<2",
+    "beautifulsoup4>=4.13,<5",
+    "cryptography>=45",
     "fastapi[standard]>=0.141.1",
+    "httpx>=0.28,<1",
+    "itsdangerous>=2.2,<3",
+    "ocrmypdf>=16.10,<17",
+    "psycopg[binary]>=3.2,<4",
+    "pydantic-settings>=2.10,<3",
+    "pypdf>=6,<7",
+    "sqlalchemy>=2.0,<2.1",
 ]
 
 [project.scripts]
 komorebi-server = "komorebi_server.main:run"
+komorebi-worker = "komorebi_server.app.worker:run"
+komorebi-admin = "komorebi_server.app.cli:run"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]

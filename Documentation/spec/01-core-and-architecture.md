@@ -145,9 +145,12 @@ The application shell owns session status, navigation, theme selection and route
 | --- | --- |
 | `/today` | Today |
 | `/capture`, `/goals`, `/tasks`, `/calendar` | Respective planning modules |
-| `/learn/library`, `/learn/notes` | Knowledge |
-| `/learn/sessions`, `/learn/resume` | Study |
-| `/learn/review`, `/learn/exams`, `/learn/japanese`, `/learn/connections` | Respective learning modules |
+| `/learn`, `/learn/sessions`, `/learn/sessions/:id` | Learn composition: Home and persistent subject Sessions |
+| `/learn/artifacts` | Knowledge, scoped and grouped within Sessions |
+| `/learn/review` | Reviews: Session-linked decks and SM-2 history |
+| `/learn/practice/:id` | Study practice runs within a subject Session |
+| `/learn/library/:sourceId`, `/learn/notes/:id`, `/learn/exams/:id` | Existing detail views; return to the parent Session where supplied |
+| `/learn/library`, `/learn/resume`, `/learn/connections` | Legacy routes retained without top-level Learn tabs |
 | `/home`, `/home/scenes` | Home |
 | `/home/alerts` | Home Alerts |
 | `/life/training`, `/life/habits`, `/life/review`, `/life/people` | Respective life modules |

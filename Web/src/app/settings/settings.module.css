@@ -1,0 +1,50 @@
+.module {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.module small {
+  display: block;
+  color: var(--muted);
+  font: 9px var(--mono);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.provider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  align-items: center;
+}
+
+.provider small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.budget {
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--home);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.budget strong {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}

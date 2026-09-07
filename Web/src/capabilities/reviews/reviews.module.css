@@ -1,0 +1,83 @@
+.due {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  align-items: start;
+}
+
+.due[data-paused='true'] {
+  opacity: 0.5;
+}
+
+.due q {
+  font-family: var(--serif);
+  font-size: 14px;
+  quotes: none;
+}
+
+.due small {
+  display: block;
+  color: var(--muted);
+  font: 9px var(--mono);
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+}
+
+.topic {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.cap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--home);
+}
+
+.cap strong {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.tradeoff {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.tradeoff button {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 4px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+}
+
+.tradeoff button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--onaccent);
+  border-color: var(--accent);
+}
+
+.tradeoff button b {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+}

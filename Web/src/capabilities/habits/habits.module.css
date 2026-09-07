@@ -1,0 +1,73 @@
+.habit {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: rise 0.35s ease both;
+}
+
+.habit[data-paused='true'] {
+  opacity: 0.7;
+}
+
+.cue {
+  font: 10px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.habit h3 {
+  font-size: 20px;
+}
+
+.fallback {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.strip {
+  display: flex;
+  gap: 4px;
+}
+
+.strip i {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--line);
+  display: grid;
+  place-items: center;
+  font: 9px var(--mono);
+  font-style: normal;
+  color: var(--muted);
+}
+
+.strip i[data-kind='completed'] {
+  background: var(--accent);
+  color: var(--onaccent);
+}
+
+.strip i[data-kind='fallback'] {
+  background: var(--soft-2);
+  color: var(--ink);
+}
+
+.strip i[data-kind='resting'] {
+  background: transparent;
+  border: 1px dashed var(--line);
+}
+
+.strip i[data-kind='skipped'] {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.checkins {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}

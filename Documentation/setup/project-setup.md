@@ -18,12 +18,17 @@ Run `npm run build` for a production frontend build and `npm run lint` for the c
 
 ## Server
 
+The backend core now includes PostgreSQL migrations, revocable sessions, explicit module composition, transactional idempotency/outbox, a durable worker, private files and secrets, AI policy ports, notifications, and initial Tasks/Usage/Conversations services.
+
 ```bash
 cd Server
 uv sync
+uv run komorebi-admin init
+docker compose up -d postgres
+uv run alembic upgrade head
 uv run komorebi-server
 ```
 
-The development API listens on `http://127.0.0.1:8000`. Its initial setup endpoint is `GET /health`; interactive FastAPI documentation is available at `/docs` while the server is running.
+Run `uv run komorebi-worker` in a second terminal. An existing PostgreSQL installation can replace Docker by setting the database URL in `.env`.
 
-Run `uv run ruff check .` for Python lint checks. Capability packages, databases, integrations and generated frontend API clients are intentionally deferred to their implementation slices.
+See [the backend guide](../../Server/README.md) for sign-in tickets, API conventions, generated TypeScript types, tests, deployment boundaries and recovery. The frontend still uses mocks; its existing role switch does not authenticate backend requests.

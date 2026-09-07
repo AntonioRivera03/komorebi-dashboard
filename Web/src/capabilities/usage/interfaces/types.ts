@@ -1,0 +1,5 @@
+export type WorkflowOutcome = { workflow: string; capability: string; started: number; completed: number; abandoned: number; failed: number; medianSeconds?: number }
+export type SuggestionStats = { kind: string; presented: number; opened: number; accepted: number; edited: number; dismissed: number }
+export type UsageObservation = { id: string; at: string; capability: string; action: string; kind: 'presentation' | 'start' | 'completion' | 'failure' | 'acceptance' | 'edit' | 'dismissal' | 'cancellation'; workflowId?: string; correlationId: string; release: string; durationMs?: number; outcome?: string; resource?: string; route?: string }
+export type AiCost = { capability: string; requests: number; tokensIn: number; tokensOut: number; estimatedCents: number; usefulOutcomes: number }
+export type UsageReport = { window: { from: string; to: string; coverage: 'complete' | 'partial' }; dailyActivity: number[]; capabilities: { capability: string; events: number }[]; workflows: WorkflowOutcome[]; suggestions: SuggestionStats[]; ai: AiCost[]; recent: UsageObservation[]; gaps: string[] }

@@ -4,9 +4,32 @@
 
 Fundamental: preserve sources and understanding, practise retrieval/application and return to knowledge over time. Knowledge stores what the material says and what you wrote; Study stores what you attempted; specialized modules interpret those attempts for their own objectives.
 
+## Frontend rework · Sessions first
+
+The Learn navigation is **Home · Sessions · Artifacts · Review**. `/learn` opens Home. A **Session** is a persistent subject or subject-topic workspace, such as Japanese or Cognitive psychology, rather than a single timed practice attempt. Selecting it opens `/learn/sessions/:id` with its Sources, Artifacts, Flashcards, Quizzes and Exams. These are local views within that subject; Japanese, Library, Resume, Exams and Connections are no longer independent top-level Learn tabs.
+
+- **Interface copy:** omit decorative eyebrows, motivational captions and duplicate explanations. Keep actionable guidance, meaningful subject/topic labels, validation, and storage status. “Head to Review to study your decks” links directly to `/learn/review`.
+- **Home:** one random flashcard with reveal/another-card actions, a compact activity count, and a titled Pomodoro. Revealing a Home card is casual recall and does not change review history or scheduling.
+- **Sessions:** create a subject workspace, describe it briefly, then collect its material. A resource belongs to a Session. Topics are shared within that Session and can be selected or created while capturing an Artifact or authoring a card. Topic names in different Sessions do not imply shared ownership.
+- **Artifacts:** replace the Notes tab with quick pieces of writing: thoughts, facts, questions and explanations. Capture with a Session and topic; edit or regroup later. The global page filters by Session and topic and groups the results by topic. Longer notes and provenance remain valid underlying Knowledge concepts.
+- **Review:** deck-based SM-2 study, a Session filter, due-card counts and actual review history. No Interested badge, daily-cap slider, retention-target control or 14-day forecast. History shows completed ratings per local calendar day across 7, 30 or 90 days, including repeat attempts, with accessible daily counts. Empty history stays at zero; example data must never pretend the user has studied.
+- **Decks:** create a named grouping, attach it to one Session and choose its default topic. Each card has its own topic, front and back. New cards default to the deck topic, with existing or newly entered topics available. Decks can be reassigned to a Session without resetting card schedules; historical reviews retain the Session recorded at review time.
+
+**Current implementation:** the Learn authoring experience supports browser preview storage and an independently enabled `learn` backend. Its bounded typed workspace persists subject Sessions, text sources, exact highlights, Artifacts, deck drafts, flashcards, quizzes and manual practice history. See [learning persistence decision](../decisions/002-learning-workspace.md) for ownership, limits and the future Knowledge/Study extraction boundary. Existing source/exam detail screens and practice routes remain compatible.
+
+**Source → Artifact:** Sources use a file list on the left and an inline reader in the center, with no source-card grid or reading popup. Add source opens a modal whose first dropdown is Website, File or Text. Websites extract cleaned readable text; files support UTF-8 text/Markdown/HTML and text-based PDFs. Processing locks the form and dismissal until completion; failures offer pasted text. Review the extracted text, then add the source. Select a passage in the reader and save a highlight or create an Artifact. Highlights preserve exact UTF-16 offsets and quotes; repeated text resolves to the selected occurrence. An Artifact retains the passage link when its body is edited. Sources already stored on the server are immutable; add a new source for revised text. See [source imports](../decisions/003-source-reader-and-imports.md) for request/parser bounds, URL validation and supported file limits. The app shell and Learn page fill the browser width; narrow screens stack the source list above the reader.
+
+**Artifacts → deck draft → deck:** select one or more visible Artifacts, create a draft, author each question and review/edit its answer before publication. Artifacts initially populate the answer side; no AI generation is claimed. Remove unwanted cards and choose the destination subject/title/topic in the preview. Saved drafts appear in Artifacts and Flashcards/Review, stay out of review queues, and publish once with stable identifiers.
+
+**Flashcards → quiz:** select one or more cards in an open deck, inspect questions/reference answers, name the quiz and create it in that deck's subject. Card fronts/backs are copied into a quiz snapshot without removing cards or modifying review schedules. Submissions retain answer and question snapshots before revealing references. Prior attempts are available in the quiz. Automatic grading and multiple-choice generation remain future work.
+
+**Persistence and connection:** Core owner-ticket authentication protects Learn. The browser offers connection, explicit import of preview data into an empty server workspace, save/error status, JSON export, safe retry, same-owner reauthentication and explicit conflict reload. The backend validates all references and size limits, checks workspace revisions, and preserves original sources and recorded history. Unrelated capabilities can be disabled. The active timer remains local to each device; completed focus history persists with the workspace. There is no durable offline replay queue yet.
+
+**Backend follow-up:** preserve subject identity separately from Study's practice `session`. Future Knowledge/Study/Reviews resource-level commands must preserve existing IDs and provenance. Durable original-file retention, OCR, richer exams, AI drafting and large-library pagination remain future work.
+
 ## L01 · Import study sources with traceable locations
 
-Priority: Essential. Module: `knowledge`. Routes: `/learn/library`, `/learn/library/:sourceId`.
+Priority: Essential. Module: `knowledge`. Routes: `/learn/sessions/:id?section=Sources`, with existing detail `/learn/library/:sourceId` and legacy library `/learn/library`.
 
 **User behavior**
 
@@ -25,13 +48,13 @@ Priority: Essential. Module: `knowledge`. Routes: `/learn/library`, `/learn/libr
 
 **Acceptance:** imported passages can be traced back to an original location; failed extraction remains retryable; revised sources preserve old references while making their superseded status clear.
 
-## L02 · Write, link and search concept notes
+## L02 · Capture, group and connect Artifacts
 
-Priority: Essential. Module: `knowledge`. Routes: `/learn/notes`, `/learn/notes/:id`, `/learn/library/search`.
+Priority: Essential. Module: `knowledge`. Routes: `/learn/artifacts`, `/learn/sessions/:id?section=Artifacts`; legacy detail `/learn/notes/:id` and source search `/learn/library/search`.
 
 **User behavior**
 
-- Write explanations in your own words, attach source references, mark unanswered questions and tag notes with topics.
+- Quickly capture a piece of information in your own words, associate it with a Session and select or create a topic. Group and filter Artifacts by topic; edit the writing or grouping later. Attach source references and mark unanswered questions when useful.
 - Link two notes with a typed relationship such as prerequisite, example, contrast or related idea. Describe why the relationship exists.
 - Search titles, note text and permitted extracted source content. Filter by topic, source and status; see excerpts and locations with results.
 - Revise notes while preserving useful history. Archive differs from delete.
@@ -48,7 +71,7 @@ Priority: Essential. Module: `knowledge`. Routes: `/learn/notes`, `/learn/notes/
 
 ## L03 · Run study sessions and record practice attempts
 
-Priority: Essential. Module: `study`. Routes: `/learn/sessions`, `/learn/sessions/:id`.
+Priority: Essential. Module: `study`. Routes: `/learn/practice/:id`, launched within a subject Session. The Study-owned `session` below is a practice run; the frontend Session is its persistent subject container.
 
 **User behavior**
 
@@ -69,27 +92,29 @@ Priority: Essential. Module: `study`. Routes: `/learn/sessions`, `/learn/session
 
 ## L04 · Schedule spaced reviews from attempt history
 
-Priority: Interested. Module: `reviews`. Route: `/learn/review`.
+Priority: Essential. Module: `reviews`. Route: `/learn/review`.
 
-**User behavior:** explicitly enroll approved prompts, view due items, choose a review workload/new-item cap, pause a topic and resume it. Start a review session using Study. Show why an item is due and make workload/retention tradeoffs visible.
+**User behavior:** create a deck, attach it to a Session, and author question/answer cards with existing or new topics. Open a deck to inspect or add cards. Review its due cards or all due cards in the selected Session without a daily cap. Reveal before rating; show remaining cards and record every rating. Cards rated below four return in the current round and remain due if the user finishes early. History plots completed reviews rather than future workload.
 
-**Owned data:** `review_enrollment`, `schedule_state`, `review_transition`, `scheduler_profile`. Store algorithm name/version, input attempt IDs, rating mapping and prior state so transitions can be inspected and replayed under the same version.
+**Owned data (planned contract, no schema work in this pass):** `deck`, `deck_session_ref`, `card_topic_ref`, `review_enrollment`, `schedule_state`, `review_transition`, `scheduler_profile`. Store algorithm name/version, input attempt IDs, rating mapping and prior state so transitions can be inspected and replayed under the same version.
 
 **Interfaces:** reads approved prompt versions and eligible assessments through Study. Consumes `study.attemptRecorded.v1` and `study.assessmentRecorded.v1`, and issues `Study.startSession` for selected prompt IDs. Each `(enrollment_id, assessment_id, scheduler_version)` applies at most once across both event paths. Unassessed/AI-draft outcomes cannot silently update retention estimates. A correction replaces the effective assessment for that attempt and triggers a deterministic replay from the affected transition; it is not treated as another practice attempt.
 
-**Algorithm decision:** select a maintained deterministic scheduler or an existing review-tool integration during this slice. FSRS is a candidate, not a newly invented model. Specify the exact rating mapping, migration behavior and supported attempt formats before enabling scheduling. Free-response/exam results do not automatically map to flashcard ratings.
+**Algorithm decision: SM-2, application scheduler version 1.** Each card starts with ease 2.5, zero successful repetitions and no interval. The six quality buttons map directly to grades 0–5: blank, recognized after reveal, incorrect but almost recalled, difficult correct recall, correct after hesitation, and immediate correct recall. Successful intervals begin at 1 and 6 days, then use the prior interval multiplied by the prior ease, rounded up. Update ease with `max(1.3, ease + 0.1 - (5-q) * (0.08 + (5-q) * 0.02))`; grades below 3 reset the successful-repetition count and interval to 0 and 1 respectively. Grades below 4 are repeated in the same round. In this implementation each such repetition receives its own rating and transition, and remains immediately due until a grade of at least 4. Advance due dates by local calendar days. Persist prior/next state, grade, card/deck/Session IDs and timestamp for replay. Production scheduling must use an explicit user timezone and an authoritative server clock. Quizzes, exams and casual Home reveals never implicitly grade flashcards.
+
+No automatic FSRS-to-SM-2 conversion is introduced. A future backend integration must explicitly choose migration/reset behavior and preserve the previous schedule and review history before changing existing enrollments.
 
 **AI:** never chooses the next review interval. It may help repair a confusing prompt as a new draft revision.
 
 **Failure behavior:** duplicate/out-of-order events reconcile from attempt history. Prompt deletion or a flagged invalid revision suspends enrollment. Pausing does not fabricate successful recall or reset history. Algorithm changes require a deliberate migration and reversible comparison.
 
-**Acceptance:** the same ordered assessments yield the same schedule; retries do not advance it twice; a workload cap changes the displayed session without pretending overdue items were learned.
+**Acceptance:** the same ordered ratings, timestamps and timezone yield the same schedule; retries do not advance it twice; unfinished/repeat cards stay due; history updates from real ratings; deck creation and topic selection work within the chosen Session.
 
-Reference: [Anki FSRS documentation](https://docs.ankiweb.net/deck-options.html#fsrs) describes scheduler configuration and retention/workload tradeoffs. It does not define this integration’s contract.
+Reference: [Original SuperMemo SM-2 algorithm](https://super-memory.org/archive/english/ol/sm2.htm). The application-specific replay, persistence and timezone requirements above define this integration’s contract.
 
 ## L05 · Build exam plans and grade practice attempts
 
-Priority: Essential. Module: `exams`. Routes: `/learn/exams`, `/learn/exams/:id`.
+Priority: Essential. Module: `exams`. Routes: `/learn/sessions/:id?section=Exams`, with existing details at `/learn/exams/:id`.
 
 **User behavior**
 
@@ -110,7 +135,7 @@ Priority: Essential. Module: `exams`. Routes: `/learn/exams`, `/learn/exams/:id`
 
 ## L06 · Practise Japanese communication skills
 
-Priority: Essential. Module: `japanese`. Routes: `/learn/japanese`, `/learn/japanese/skills/:id`.
+Priority: Essential. Module: `japanese`. Route: `/learn/sessions/japanese`. Japanese is a Session, not a separate Learn section. Language-specific capabilities below remain available for future integration within that space.
 
 **User behavior**
 
@@ -162,3 +187,17 @@ Priority: Essential. Module: `connections`. Route: `/learn/connections`.
 **Failure behavior:** changed/deleted source notes invalidate the suggestion before approval. No useful candidates is a valid result. Model failure leaves the library and manual linking usable.
 
 **Acceptance:** every suggestion resolves to authorized note revisions; approval creates a Knowledge-owned relationship exactly once; dismissal and stale-source checks survive refresh.
+
+## L09 · Focus with a titled Pomodoro and completion audit
+
+Priority: Essential. Module: `study`. Route: `/learn`.
+
+**User behavior:** enter what you are studying, optionally choose its Session, and choose any positive whole-minute focus duration (25 minutes by default). The choice persists for subsequent focus periods, including across breaks, resets and refreshes. Start the configured focus period. Pause, resume or reset. At completion, hold the timer at `00:00` until the user presses **Finish**. Finish silences the alarm, plays a short upbeat celebration once, and resets to the chosen focus duration; there is no automatic transition into a break or another run. A 5-minute break can be selected explicitly while idle, and its completion also waits for Finish. Freeze the duration, study title and Session after starting so the completion record describes the original activity. Navigation or refresh must not reset a running timer. A suspended tab reconciles the saved deadline when it wakes. Paused time is excluded from focus duration.
+
+**Target dedicated audit table (current completions persist as append-only workspace records):** `pomodoro_completion(id, user_id, timer_run_id, learning_session_id nullable, study_title, started_at, completed_at, planned_focus_seconds, focus_seconds, timezone, recorded_at)`. Require a unique `(user_id, timer_run_id)` key. Every completed focus period produces exactly one append-only row; pauses, resets before completion, skipped breaks and completed breaks produce none. Store both the configured target (`planned_focus_seconds`) and the actual active duration completed (`focus_seconds`) in seconds on every audit record; never assume a fixed 25 minutes. A naturally completed timer records its full configured duration. Record completion at the timer deadline, independently of when Finish is pressed. Waiting for acknowledgment and repeated jingles add no focused time or extra rows. Exclude paused time and delayed completion detection from active time; `completed_at - started_at` is wall-clock duration and must not be substituted for focused time. For example, a 42-minute timer paused for one minute records 2,520 focused seconds, even though 43 minutes elapsed. Sum recorded durations for daily totals. Store the scheduled completion timestamp when detection is delayed. Keep the title snapshot even if the Session is renamed. Retry after offline/reconnect with the same run ID. Audit history should be queryable by date and Session and shown in a table with title, Session, completion time and focus duration.
+
+**Completion sound:** repeat the short, cheerful jingle in a native audio-buffer loop when focus or a break finishes, until the user presses Finish (or mutes sound). Finish must halt the currently playing phrase immediately, then play a distinct one-shot victory tune: a bright ascending phrase resolving to a major chord. This celebration respects the sound toggle, does not loop, and never plays for an early Reset, pause, or automatic timer expiration. Keep the alarm alive during navigation and show a compact Finish control outside Learn Home. Persist the finished state across refreshes; after audio is unlocked, an unacknowledged alarm resumes. Test sound remains a single preview, not a loop. Provide a persistent sound toggle and a Test sound action. Resets before the deadline and pause/resume must not trigger the jingle. Unlock audio from a user gesture; after refresh, sound requires browser audio permission from a subsequent interaction. Tab suspension can delay playback until the page wakes. Sound failure must never prevent completion or recording. See [Web Audio autoplay guidance](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices#autoplay_policy).
+
+**Frontend preview:** store the configured duration, timer deadline, remaining time, finished/awaiting-Finish state, title, optional Session and completion records in browser storage. Display a local Focus history table after the first completion. This is a local interaction preview, not a database audit or a promise of account/multi-device synchronization. Browser storage clearing removes the preview. Multiple simultaneous tabs/devices require a future authoritative completion service and reconciliation policy.
+
+**Acceptance:** a newly started one-minute timer displays `01:00`, never `01:01`, even if the UI clock predates the click; Resume cannot add a display second; completion stays at zero and loops the alarm until Finish; Finish silences immediately and restores the configured focus duration; completing focus creates one local row; subsequent ticks/reload cannot duplicate it; completion detected after a long sleep uses the saved deadline; pausing/resuming preserves sub-second remaining focus time; custom durations survive breaks/resets/refresh; old browser records are upgraded as 25-minute runs without losing history; the displayed daily total sums each recorded duration; breaks and incomplete resets create no row. No database, migration or server changes are included in this frontend pass.

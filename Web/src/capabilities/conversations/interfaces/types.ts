@@ -1,0 +1,3 @@
+export type Thread = { id: string; title: string; originCapability: string; createdAt: string; updatedAt: string; messageCount: number; archived: boolean; contextRefs: string[]; summary?: { text: string; version: number } }
+export type MessageRevision = { revision: number; text: string; at: string }
+export type ThreadMessage = { id: string; role: 'user' | 'assistant' | 'system' | 'tool'; text: string; at: string; status: 'completed' | 'interrupted' | 'failed' | 'connection_needed'; revisions: MessageRevision[]; run?: { id: string; model: string; promptTemplate: string; latencyMs: number; tokensIn: number; tokensOut: number; tools: string[]; contextRefs: string[] }; attachments?: string[] }

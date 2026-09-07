@@ -1,0 +1,46 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.row small {
+  display: block;
+  color: var(--muted);
+  font: 9px var(--mono);
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+
+.amount {
+  font-family: var(--serif);
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.saving {
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--home);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.saving strong {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.totals {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}

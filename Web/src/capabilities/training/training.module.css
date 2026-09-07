@@ -1,0 +1,60 @@
+.workout {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.workout[data-status='missed'] {
+  color: var(--muted);
+}
+
+.date {
+  font: 10px var(--mono);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.date b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.effort {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: var(--accent);
+}
+
+.effort[data-effort='steady'] {
+  background: var(--symbol);
+}
+
+.effort[data-effort='hard'] {
+  background: var(--warn);
+}
+
+.baseline {
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--home);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.baseline strong {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}

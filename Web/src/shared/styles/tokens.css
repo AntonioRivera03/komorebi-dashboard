@@ -1,0 +1,70 @@
+/*
+ * Komorebi design tokens.
+ * Extracted from Documentation/design/styles/komorebi/*.css.
+ * Light is the default; dark is selected with [data-theme="dark"] on <html>.
+ */
+.komorebi {
+  color-scheme: light;
+  --bg: #f1eee5;
+  --panel: #f6f4ed;
+  --ink: #303b31;
+  --muted: #6c7465;
+  --line: #d6d8ca;
+  --accent: #435344;
+  --onaccent: #fffdf3;
+  --soft: #e3e6d6;
+  --soft-2: #dfe1ce;
+  --home: #e3e5d7;
+  --symbol: #647358;
+  --radius: 3px;
+  --radius-lg: 6px;
+  --pill: 30px;
+
+  /* Semantic states, derived to stay quiet inside the palette. */
+  --ok: #4f6b4a;
+  --warn: #8a6d2a;
+  --danger: #8d4a3f;
+  --ok-soft: #dfe6d5;
+  --warn-soft: #ece3c9;
+  --danger-soft: #eedad4;
+
+  --font: Arial, Helvetica, sans-serif;
+  --serif: Georgia, 'Times New Roman', serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --shadow: 0 18px 50px rgba(48, 59, 49, 0.14);
+  --overlay: rgba(48, 59, 49, 0.32);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+}
+
+.komorebi[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #191e1a;
+  --panel: #222a23;
+  --ink: #e8e5d8;
+  --muted: #a9b09f;
+  --line: #414d40;
+  --accent: #afbd98;
+  --onaccent: #1a241b;
+  --soft: #303b2e;
+  --soft-2: #303b2e;
+  --home: #232c24;
+  --symbol: #afbd98;
+
+  --ok: #a9c19a;
+  --warn: #d6b96f;
+  --danger: #d69283;
+  --ok-soft: #2b3a2a;
+  --warn-soft: #3a3324;
+  --danger-soft: #3d2a26;
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --overlay: rgba(10, 14, 11, 0.55);
+}
